@@ -64,23 +64,6 @@ print(result)
 
 *(Numbers above are illustrative — replace with real output from your own run.)*
 
-## Model Evaluation
-
-To validate predictive performance, the model was backtested on completed matches (walk-forward: each prediction only uses data available *before* that match was played, so no result leaks into its own forecast).
-
-| Metric | Score |
-|---|---|
-| Accuracy (match result) | XX% |
-| Log Loss | X.XX |
-| Brier Score | X.XX |
-| Ranked Probability Score (RPS) | X.XX |
-
-- **Accuracy** treats it as a 3-way classification (home win / draw / away win).
-- **Log Loss** and **Brier Score** score the full probability distribution, not just the top pick — the model is rewarded for being well-calibrated, not just "right."
-- **Calibration plot** — predicted probability vs. observed frequency, bucketed into deciles across all forecasted matches.
-
-*Note: sample sizes are small early in the tournament, so these numbers will tighten up as more matches complete.*
-
 ## Project Structure
 
 ```
@@ -109,7 +92,9 @@ worldcup2026-predictor/
    ```bash
    jupyter notebook notebooks/wc2026_predictor.ipynb
    ```
-4. Run all cells — data is fetched live, so ratings and predictions reflect whatever matches have been completed at the time you run it.
+4. Run all cells — data is fetched live from the same source, so ratings reflect the full completed tournament.
+
+**Note:** since the 2026 World Cup has now concluded, the "upcoming fixtures" cell (which filters for unplayed matches) will return an empty list — there are no more matches left to forecast. Ratings, the scoreline heatmap, and manual matchup predictions below still work as before, using the final completed dataset.
 
 To predict a specific matchup directly in Python:
 
